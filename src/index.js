@@ -60,12 +60,12 @@ async function sync() {
         var Counter = AV.Object.extend('Counter');
         _.forEach(urls, (x) => {
             var query = new AV.Query('Counter');
-            query.equalTo('url', x.url);
+            query.equalTo('url', x.url.substring(1));
             query.count().then(
                 (count) => {
                     if (count === 0) {
                         var counter = new Counter();
-                        counter.set('url', x.url);
+                        counter.set('url', x.url.substring(1));
                         counter.set('title', x.title);
                         counter.set('time', 0);
                         counter.save().then(
